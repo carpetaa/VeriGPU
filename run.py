@@ -28,7 +28,7 @@ def run(args):
             ' src/generated/mul_pipeline_cycle_32bit_2bpc.sv src/int/mul_pipeline_32bit.sv'
             ' src/core.sv test/behav/core_and_mem.sv'
             ' src/mem_large.sv src/global_mem_controller.sv build/core_and_mem_driver.sv') == 0
-        os.system('./a.out | tee /tmp/out.txt')
+        os.system('vvp ./a.out -fst +TEST_NAME='+ args.name +' | tee /tmp/out.txt')
     with open('/tmp/out.txt') as f:
         output = f.read()
         if 'ERROR' in output:
@@ -69,6 +69,7 @@ def run(args):
 
 
 if __name__ == '__main__':
+    os.system("mkdir -p sim.out")
     parser = argparse.ArgumentParser()
     parser.add_argument('--name', type=str, required=True, help='eg prog5')
     parser.add_argument('--verilator', action='store_true', help='use verilator')
