@@ -26,6 +26,19 @@ We use the `iverilog` simulator to run simulation of our design at the behaviora
 - `iverilog`
 - have cloned this repo, and be at the root of this repo
 
+Follow below to install iverilog to the right version.
+```
+git clone https://github.com/steveicarus/iverilog.git
+git checkout v11-branch
+sudo apt-get install autoconf gperf flex bison build-essential
+sh autoconf.sh
+./configure
+make
+sudo make install
+```
+Follow below to create soft link for python.
+`sudo ln -s /usr/bin/python3 /usr/bin/python`
+
 ### Procedure
 
 ```
