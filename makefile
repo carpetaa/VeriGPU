@@ -1,6 +1,7 @@
 .PHONY: clean run_regression
 clean:
 	rm -rf build obj_dir\
+		a.out \
 		sim.out \
 		test/behav/verilator/build \
 		test/behav/verilator/sim.out \
