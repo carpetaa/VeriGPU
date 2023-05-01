@@ -85,4 +85,11 @@ module core_and_mem(
         .mem_rd_req(core1_mem_rd_req),
         .mem_wr_req(core1_mem_wr_req)
     );
+    initial begin
+        string TEST_NAME, SEED;
+        if ( $value$plusargs("TEST_NAME=%s", TEST_NAME) )begin
+            $dumpfile($sformatf("sim.out/wave_dumps/%s.dump", TEST_NAME));
+            $dumpvars;
+        end
+    end
 endmodule

@@ -23,6 +23,7 @@ const int kernel_offset = 128;
 int main(int argc, char **argv, char **env)
 {
     Verilated::commandArgs(argc, argv);
+    Verilated::traceEverOn(true);
 
     core_and_mem *dut = new core_and_mem;
 
@@ -154,6 +155,23 @@ int main(int argc, char **argv, char **env)
         i += 1;
     }
 
+    std::string test_name = "";
+    std::string argv_str = "";
+    //parse char argv** with for loop
+    for (int i = 0; i < argc; i++)
+    {
+        argv_str=argv[i];
+        // check if the start of argv_str is +TEST_NAME=
+        if (argv_str.substr(0,11)=="+TEST_NAME=")
+        {
+            //if it is, then set test_name to the rest of the string
+            test_name = argv_str.substr(11);
+        }
+    }
+
+    //format test_name to a coverage path
+    std::string coverage_data_path = "sim.out/cov_logs/" + test_name + "_cov.dat";
+    Verilated::threadContextp()->coveragep()->write(coverage_data_path.c_str());
     // m_trace->close();
     delete dut;
     exit(EXIT_SUCCESS);

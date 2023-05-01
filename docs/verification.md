@@ -53,6 +53,12 @@ bash test/behav/run_examples.sh
 
 - under the hood, this will run many of the examples in [examples/direct](/examples/direct), and check the outputs against the expected outputs, which are in the paired files, with suffix `_expected.txt`, in the sub-folder [examples/direct/expected](/examples/direct/expected) folder.
 
+```
+bash test/behav/verilator/coverage_gen.sh
+```
+
+After regression, run this to generate coverage info
+
 ## Gate-level simulation and testing
 
 ### Concept

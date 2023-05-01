@@ -17,7 +17,7 @@ def run(args):
         f.write(comp_driver)
     os.system(f'cat examples/direct/{args.name}.asm')
     if args.verilator:
-        os.system('test/behav/verilator/run.sh | tee /tmp/out.txt')
+        os.system('test/behav/verilator/run.sh +TEST_NAME=' + args.name +' | tee /tmp/out.txt')
     else:
         assert os.system(
             'iverilog -Wall -g2012 -pfileline=1 src/assert.sv src/op_const.sv'
@@ -69,7 +69,7 @@ def run(args):
 
 
 if __name__ == '__main__':
-    os.system("mkdir -p sim.out")
+    os.system("mkdir -p sim.out/wave_dumps")
     parser = argparse.ArgumentParser()
     parser.add_argument('--name', type=str, required=True, help='eg prog5')
     parser.add_argument('--verilator', action='store_true', help='use verilator')

@@ -8,7 +8,7 @@ set(SRC ${BASE}/src)
 set(BEHAV ${CMAKE_SOURCE_DIR}/..)
 
 add_executable(core_and_mem ${CMAKE_SOURE_DIR}verilator_driver.cpp ${VERILATOR_ROOT}/include/verilated.cpp)
-verilate(core_and_mem SOURCES ${SRC}/assert.sv ${SRC}/const.sv ${SRC}/op_const.sv
+verilate(core_and_mem SOURCES ${SRC}/verilator_config.vlt ${SRC}/assert.sv ${SRC}/const.sv ${SRC}/op_const.sv
     ${SRC}/int/chunked_add_task.sv ${SRC}/int/chunked_sub_task.sv
     ${SRC}/float/float_params.sv ${SRC}/float/float_mul_pipeline.sv
     ${SRC}/float/float_add_pipeline.sv
@@ -21,6 +21,7 @@ verilate(core_and_mem SOURCES ${SRC}/assert.sv ${SRC}/const.sv ${SRC}/op_const.s
     ${BEHAV}/core_and_mem.sv
     TOP_MODULE core_and_mem
     PREFIX core_and_mem
+    TRACE_FST COVERAGE
     VERILATOR_ARGS +1800-2017ext+sv --x-initial unique --x-assign unique
 )
 option(BUILD_NETLIST "build netlist" OFF)

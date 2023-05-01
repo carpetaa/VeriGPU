@@ -49,13 +49,6 @@ module core_and_mem_driver();
         .contr_core1_set_pc_addr(contr_core1_set_pc_addr),
         .contr_core1_halt(contr_core1_halt)
     );
-    initial begin
-        string TEST_NAME;
-        if ( $value$plusargs("TEST_NAME=%s", TEST_NAME) )begin
-            $dumpfile($sformatf("sim.out/%s.dump", TEST_NAME));
-            $dumpvars;
-        end
-    end
 
     initial begin
         clk = 1;
