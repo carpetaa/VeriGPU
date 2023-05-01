@@ -683,8 +683,8 @@ module core(
         endcase
     endtask
 
-    // always @(*) begin
-    always @(mem_rd_data, div_wr_reg_req, c2_instr, state, pc, mem_ack, fadd_ack, mul_ack, fmul_ack, ena, clr, rst) begin
+    always @(*) begin
+    //always @(mem_rd_data, div_wr_reg_req, c2_instr, state, pc, mem_ack, fadd_ack, mul_ack, fmul_ack, ena, clr, rst) begin
         // $display("t=%0d core.comb mem_rd_data=%0d div_wr_reg_req=%0d c2_instr=%0h state=%0d pc=%0d mem_ack=%0d",
         //     $time, mem_rd_data, div_wr_reg_req, c2_instr, state, pc, mem_ack
         // );
