@@ -57,5 +57,18 @@ li x2 3
 srl x3, x1, x2
 outr x3
 
+or x3, x1, x2
+outr x3
+
+xor x3, x1, x2
+outr x3
+
+sub x3, x2, x1
+outr x3
+
+li x1 -150
+li x2 3
+sra x3, x1, x2
+outr x3
 
 halt

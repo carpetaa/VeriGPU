@@ -228,8 +228,7 @@ module core(
                 write_reg(_rd, c1_rs1_data + _i_imm);
             end
             SLTI: begin
-                // FIXME: this should not be the same as SLTIU
-                write_reg(_rd, { {31{1'b0}}, (c1_rs1_data < _i_imm)});
+                write_reg(_rd, { {31{1'b0}}, ($signed(c1_rs1_data) < $signed(_i_imm))});
             end
             SLTIU: begin
                 // $display("%0d SLTIU x%0d <= %0d < %0d", pc, _rd, c1_rs1_data, c1_rs2_data);
@@ -281,11 +280,11 @@ module core(
             end
             BGE: begin
                 // $display("%0d BGE %0d >= %0d => %0d", pc, c1_rs1_data, c1_rs2_data, branch_dest);
-                if (c1_rs1_data >= c1_rs2_data) branch = 1;
+                if ($signed(c1_rs1_data) >= $signed(c1_rs2_data)) branch = 1;
             end
-            BLT: begin  //fix me: BLT and BLTU should not be the same... (ditto for BGE and BGEU)
+            BLT: begin
                 // $display("%0d BLT %0d < %0d => %0d", pc, c1_rs1_data, c1_rs2_data, branch_dest);
-                if (c1_rs1_data < c1_rs2_data) branch = 1;
+                if ($signed(c1_rs1_data) < $signed(c1_rs2_data)) branch = 1;
             end
             BGEU: begin
                 // $display("%0d BGEU %0d >= %0d => %0d", pc, c1_rs1_data, c1_rs2_data, branch_dest);
@@ -392,8 +391,7 @@ module core(
                     wr_reg_data
                 );
             end
-            // fixme: this should be signed
-            SLT: wr_reg_data = c1_rs1_data < c1_rs2_data ? 1 : 0;
+            SLT: wr_reg_data = $signed(c1_rs1_data) < $signed(c1_rs2_data) ? 1 : 0;
             SLTU: begin
                 // $display("%0d SLTU x%0d <= %0d < %0d", pc, _rd_sel, c1_rs1_data, c1_rs2_data);
                 wr_reg_data = c1_rs1_data < c1_rs2_data ? 1 : 0;
@@ -413,8 +411,7 @@ module core(
                     wr_reg_data
                 );
             end
-            // fixme: SRA is currently unsigned
-            SRA: wr_reg_data = c1_rs1_data >> c1_rs2_data[4:0];
+            SRA: wr_reg_data = $signed(c1_rs1_data) >>> c1_rs2_data[4:0];
             // RV32M
             MUL: begin
                 // $display("%0d MUL.c1 %0d * %0d => x%0d", pc, c1_rs1_data, c1_rs2_data, _rd_sel);
@@ -511,7 +508,7 @@ module core(
         imm = { {20{_instr[31]}}, _instr[31:20] };
         // $display("imm %b %0d", imm, imm);
         write_reg(_rd_sel, pc + 4);
-        next_pc = imm + pc;
+        next_pc = imm + pc;//should delete
         // $display("pc %0d next_pc %0d", pc, next_pc);
         next_pc = imm + _rs1_data;
         // $display("pc %0d next_pc %0d", pc, next_pc);

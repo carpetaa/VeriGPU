@@ -52,4 +52,20 @@ outr x1
 srli x1, x2, 3
 outr x1
 
+li x1, 2473
+outr x1
+
+sltiu x3, x1, 3435
+outr x3
+
+xori x3, x1, 782
+outr x3
+
+ori x3, x1, 1874
+outr x3
+
+#li x1 -150
+#srai x3, x1, 3
+#outr x3
+
 halt
