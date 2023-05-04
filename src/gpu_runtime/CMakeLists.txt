@@ -44,6 +44,7 @@ message(STATUS "LLVM_INCLUDE_DIRS ${LLVM_INCLUDE_DIRS}")
 target_include_directories(verigpu_runtime PRIVATE ${CMAKE_SOURCE_DIR} ${CLANG_HOME}/include ${LLVM_INCLUDE_DIRS})
 verilate(verigpu_runtime
     SOURCES
+        ${SRC}/verilator_config.vlt
         ${SRC}/const.sv
         ${SRC}/op_const.sv
         ${SRC}/assert.sv
